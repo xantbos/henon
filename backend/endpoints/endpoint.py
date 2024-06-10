@@ -16,8 +16,8 @@ class Endpoint(object):
 
 	# Generic GET functionality
 	def get(self):
-		self.check_for_incremented_update()
-		return self.session
+		self.check_for_incremented_update() # do a quick check if we need to update
+		return self.session # session is 1:1 with db
 
 	# Conversion of object to string
 	def date_to_string(self, dateobject):

@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta # used for more precise accuracy than datetime deltas
 from endpoints.endpoint import Endpoint
 
-# Internal class for actual API interactions
+# Class for actual API interactions
 class Frankfurter(Endpoint):
 
 	# Setup function
