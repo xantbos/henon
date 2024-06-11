@@ -86,11 +86,11 @@ class Endpoint(object):
 			json.dump(data, outfile, indent=2)
 
 	@abstractmethod # force child class to implement this method, handle endpoint specific info
-	def first_run(self, args, **kwargs):
+	def first_run(self, *args, **kwargs):
 		pass
 
 	@abstractmethod # force child class to implement this method, handle endpoint specific info
-	def obtain_since_last_checked(self, currencies):
+	def obtain_since_last_checked(self, *args, **kwargs):
 		pass
 
 	@abstractmethod # force child class to implement this method, handle endpoint specific info

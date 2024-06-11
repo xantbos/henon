@@ -1,10 +1,13 @@
 from flask import Flask
 from flask_restful import Resource, Api
+from flask_cors import CORS
 from endpoints.frankfurter import Frankfurter
 
 # Set up our Flask Restful implementation
 app = Flask(__name__)
 api = Api(app)
+# CORS for CORS
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Root route, effectively unused
 class Default(Resource):
