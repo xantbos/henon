@@ -3,11 +3,15 @@ from flask_restful import Resource, Api
 from flask_cors import CORS
 from endpoints.frankfurter import Frankfurter
 
+# change this to the url for the frontend to block unauthorized connections
+# can optionally configure token handshakes to ensure no header spoofing
+frontend_url = "*"
+
 # Set up our Flask Restful implementation
 app = Flask(__name__)
 api = Api(app)
 # CORS for CORS
-CORS(app, resources={r"/*": {"origins": "*"}})
+CORS(app, resources={r"/currency": {"origins": f"{frontend_url}"}})
 
 # Root route, effectively unused
 class Default(Resource):
