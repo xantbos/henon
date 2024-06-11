@@ -1,0 +1,26 @@
+{
+	"type": "object",
+	"properties": {
+		"last_checked": {"type": "string"},
+		"master_currency_list": {
+			"type": "array",
+			"items": {"type": "string"}
+		},
+		"api_name": {"type": "string"},
+		"rates": {
+			"type": "object",
+			"properties": {
+				"patternProperties": {
+					"^([0-9]){4}-([0-9]){2}-([0-9]){2}$": {
+						"type": "object",
+						"patternProperties": {
+							"^([A-Z]){3}-([A-Z]){3}$": {"type": "number"}
+						}
+					}
+				}
+			}
+		}
+	},
+	"required": ["last_checked", "master_currency_list", "rates", "api_name"],
+    "additionalProperties":false
+}

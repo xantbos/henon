@@ -50,19 +50,17 @@ class Frankfurter(Endpoint):
 			if not self.obtain_endpoint_data(timestamp, currencies):
 				return False
 		else:
-			self.session = self.read_json() # read our NoSQL db file instead of calling API
+			self.session = self.read_json(self.databasename) # read our NoSQL db file instead of calling API
 			if self.session["master_currency_list"] != currencies: # currency master list differs
 				# nuke database, we need to rebuild based on the new currencies
 				os.remove(self.databasename) # delete the file (optionally make a backup)
 				if not self.first_run(yearsback,currencies): # call this method again to start from scratch
 					return False
 
-	# Takes a new root json taken from Frankfurter and injects keys into session
-	# Also calls reverse rate calculations to include them
+	# Takes a new root json taken from API and injects keys into session
 	def merge_new_rates_into_session(self, newjson):
 		baseCurrency = newjson["base"]
 		for date in newjson["rates"]:
 			for rate in newjson["rates"][date]:
 				if not date in self.session["rates"]: self.session["rates"][date] = {}
 				self.session["rates"][date][f"{baseCurrency}-{rate}"] = newjson["rates"][date][rate]
-				self.session["rates"][date][f"R-{baseCurrency}-{rate}"] = self.calculate_reverse_rate(newjson["rates"][date][rate])

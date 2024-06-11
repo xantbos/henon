@@ -1,4 +1,6 @@
 import json, requests, os.path
+from jsonschema import validate
+from pathlib import Path
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta # used for more precise accuracy than datetime deltas
 from abc import abstractmethod
@@ -9,6 +11,7 @@ class Endpoint(object):
 
 	def __init__(self, currencies):
 		# declarations
+		self.valid_schema = self.read_json(f"{Path(__file__).resolve().parents[1]}/databases/schema.json") # ensure data returns as expected
 		self.datestring = "%Y-%m-%d" # Allows easy modification
 		self.updateDelta = timedelta(weeks=4) # Quick update delay modification
 		# init exec
@@ -17,7 +20,12 @@ class Endpoint(object):
 	# Generic GET functionality
 	def get(self):
 		self.check_for_incremented_update() # do a quick check if we need to update
-		return self.session # session is 1:1 with db
+		# validate schema before we return it
+		try:
+			validate(instance=self.session, schema=self.valid_schema) # check our json is standardized
+			return self.session # session is 1:1 with db
+		except Exception as e:
+			return {"error_statement": "Json is invalid compared to schema", "error_message": str(e)}
 
 	# Conversion of object to string
 	def date_to_string(self, dateobject):
@@ -43,6 +51,7 @@ class Endpoint(object):
 		self.session["last_checked"] = self.date_to_string(datetime.now())
 		self.session["rates"] = {}
 		self.session["master_currency_list"] = currencies
+		self.session["api_name"] = self.__class__.__name__
 
 	# Checking for our NoSQL database file
 	def check_for_datajson(self):
@@ -70,13 +79,9 @@ class Endpoint(object):
 			return requests.get(url)
 		return False
 
-	# Function namesake, calculates the reverse rate 1/X and cuts decimals
-	def calculate_reverse_rate(self, value):
-		return round(1 / value, 5)
-
 	# Reads a json file, currently exclusively assigned database
-	def read_json(self):
-		with open(self.databasename, 'r') as infile:
+	def read_json(self, path):
+		with open(path, 'r') as infile:
 			content = json.load(infile)
 		return content
 

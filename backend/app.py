@@ -43,4 +43,4 @@ api.add_resource(Default, '/')
 
 # Script is run through python, not flask due to flask-restful
 if __name__ == '__main__':
-	app.run(port=65535)#debug=True)
+	app.run(port=65535)#, host="0.0.0.0", debug=True)
