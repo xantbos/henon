@@ -46,6 +46,7 @@ useEffect(() => {
     setStorage(items);
   }else{
     setStorage({'from':'USD','to':'CAD','date':24})
+	generateDateFilter(24)
   }
   }, []);
 
