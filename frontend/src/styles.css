@@ -1,0 +1,7 @@
+.ag-theme-quartz .ag-custom-class{
+    --ag-font-size: "1rem";
+    --ag-font-family: Roboto;
+    --ag-font-family: monospace;
+    --ag-foreground-color:theme(colors.amber.600);
+    --ag-background-color: theme(colors.zinc.950);
+}
