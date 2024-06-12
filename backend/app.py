@@ -29,7 +29,7 @@ string_endpoint_list = [x.__name__.lower() for x in master_endpoint_list]
 # Root route, return all valid endpoints for consumption and displaying
 class Default(Resource):
 	def get(self):
-		return {'endpoints': [x for x in string_endpoint_list]}
+		return {'endpoints': string_endpoint_list}
 
 # Primary route
 class CurrencyInformation(Resource):
