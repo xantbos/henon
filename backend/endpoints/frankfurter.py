@@ -1,4 +1,4 @@
-import itertools
+import itertools, os.path
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta # used for more precise accuracy than datetime deltas
 from endpoints.endpoint import Endpoint

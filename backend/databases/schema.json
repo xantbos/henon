@@ -6,7 +6,6 @@
 			"type": "array",
 			"items": {"type": "string"}
 		},
-		"api_name": {"type": "string"},
 		"rates": {
 			"type": "object",
 			"properties": {
@@ -21,6 +20,6 @@
 			}
 		}
 	},
-	"required": ["last_checked", "master_currency_list", "rates", "api_name"],
-    "additionalProperties":false
+	"required": ["last_checked", "master_currency_list", "rates"],
+	"additionalProperties":false
 }

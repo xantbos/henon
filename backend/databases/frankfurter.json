@@ -843,9 +843,8 @@
     }
   },
   "master_currency_list": [
-    "usd",
-    "cad",
-    "eur"
-  ],
-  "api_name": "Frankfurter"
+    "USD",
+    "CAD",
+    "EUR"
+  ]
 }

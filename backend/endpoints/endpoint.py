@@ -51,7 +51,6 @@ class Endpoint(object):
 		self.session["last_checked"] = self.date_to_string(datetime.now())
 		self.session["rates"] = {}
 		self.session["master_currency_list"] = currencies
-		self.session["api_name"] = self.__class__.__name__
 
 	# Checking for our NoSQL database file
 	def check_for_datajson(self):
