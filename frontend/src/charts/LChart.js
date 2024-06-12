@@ -1,5 +1,5 @@
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler } from 'chart.js'; 
-import { Chart } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 import { useState, useCallback } from 'react';
 import colors from "tailwindcss/colors";
 import { Context } from 'ag-grid-community';
@@ -92,7 +92,7 @@ function LChart(sentData) {
 
   
   return (
-    <Chart ref={chartRef} type="line" options={options} data={data} height={300}/>
+    <Line ref={chartRef} options={options} data={data} height={300}/>
   );
   }
 }
