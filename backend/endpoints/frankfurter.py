@@ -1,5 +1,5 @@
 import itertools, os.path
-from datetime import datetime, timedelta
+from datetime import datetime
 from dateutil.relativedelta import relativedelta # used for more precise accuracy than datetime deltas
 from endpoints.endpoint import Endpoint
 
@@ -10,7 +10,7 @@ class Frankfurter(Endpoint):
 	def __init__(self, currencies):
 		# declarations
 		self.databasename = "databases/frankfurter.json" # Allows easy modification
-		self.base_api_url = "https://www.frankfurter.app" # In case of relocation
+		self.base_api_url = "https://api.frankfurter.app" # In case of relocation
 		self.session = {} # Presetup for merging later, master database replication for this endpoint
 		super().__init__(currencies) # Run parent setup
 
